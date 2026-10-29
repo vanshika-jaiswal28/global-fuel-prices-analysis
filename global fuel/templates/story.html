@@ -1,0 +1,213 @@
+{% extends "base.html" %}
+
+{% block title %}Tableau Story - Global Fuel Analytics{% endblock %}
+
+{% block extra_head %}
+<!-- Official Tableau Embedding API v3 -->
+<script type="module" src="https://public.tableau.com/javascripts/api/tableau.embedding.3.latest.min.js"></script>
+{% endblock %}
+
+{% block content %}
+<!-- Page Header Banner -->
+<section class="page-header-banner">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-8">
+        <div class="d-inline-flex align-items-center gap-2 mb-2">
+          <span class="badge" style="background: var(--orange-accent);">Guided Narrative</span>
+          <span class="text-secondary small">Data Storytelling Format</span>
+        </div>
+        <h1 class="page-header-title">Tableau Story: Fuel Trends & Policy Trajectory</h1>
+        <p class="page-header-subtitle">
+          A sequential walkthrough examining how crude oil shocks, national income levels, and taxation policies interact globally.
+        </p>
+      </div>
+      <div class="col-lg-4 text-lg-end mt-3 mt-lg-0">
+        <a href="{{ config.TABLEAU_URL }}" target="_blank" rel="noopener noreferrer" class="btn btn-outline-light btn-sm">
+          <i class="bi bi-box-arrow-up-right me-1"></i> Open Story in Tableau Public
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Main Story Content -->
+<section class="section-padding py-4">
+  <div class="container-fluid px-lg-4">
+
+    <!-- Story Introduction Callout -->
+    <div class="callout-info mb-4">
+      <div class="d-flex align-items-start gap-3">
+        <i class="bi bi-journal-text fs-4 text-teal" style="color: var(--teal-primary);"></i>
+        <div>
+          <h5 class="h6 fw-bold mb-1">Story Methodology & Analytical Flow</h5>
+          <p class="small text-secondary mb-0">
+            A Tableau Story chains multiple visualization points to communicate step-by-step analytical findings. Below is the embedded interactive story followed by structured narrative placeholders aligned with the dataset dimensions.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tableau Story Embed Card -->
+    <div class="tableau-outer-card" id="storyTableauCard">
+      <!-- Toolbar Header -->
+      <div class="tableau-toolbar-strip">
+        <div class="tableau-title-status">
+          <span class="fw-bold text-dark fs-6">
+            <i class="bi bi-book-half text-teal me-1" style="color: var(--teal-primary);"></i>
+            Tableau Story: Global Fuel Price & Taxation Trends
+          </span>
+          <span class="status-pill live">
+            <span class="spinner-grow spinner-grow-sm text-success" style="width: 8px; height: 8px;" role="status"></span>
+            Story Live
+          </span>
+        </div>
+
+        <div class="tableau-actions">
+          <button type="button" class="btn-viz-control" data-action="reload-viz" title="Reload Story Visualization">
+            <i class="bi bi-arrow-clockwise"></i>
+            <span class="btn-label">Reload</span>
+          </button>
+          
+          <button type="button" class="btn-viz-control" data-action="toggle-fullscreen" title="Toggle Fullscreen View">
+            <i class="bi bi-arrows-fullscreen"></i>
+            <span class="btn-label">Fullscreen</span>
+          </button>
+
+          <a href="{{ config.TABLEAU_URL }}" target="_blank" rel="noopener noreferrer" class="btn-viz-control text-primary" title="Open directly in Tableau Public">
+            <i class="bi bi-box-arrow-up-right"></i>
+            <span>Tableau Link</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Viewport & Embed Container -->
+      <div class="viz-container-viewport">
+        <!-- Loading Spinner Overlay -->
+        <div class="viz-loading-overlay">
+          <div class="viz-spinner"></div>
+          <h6 class="fw-bold text-dark mb-1">Loading Tableau Story...</h6>
+          <p class="text-secondary small mb-2">Connecting to Tableau Public servers and retrieving story points.</p>
+          <small class="text-muted">Takes ~2-4 seconds depending on network connection.</small>
+        </div>
+
+        <!-- Primary: Tableau Embedding API v3 Web Component for Story -->
+        <tableau-viz id="tableauStoryViz"
+          src="{{ config.STORY_VIZ_URL }}"
+          toolbar="bottom"
+          hide-tabs>
+        </tableau-viz>
+      </div>
+
+      <!-- Fallback Box -->
+      <div class="viz-fallback-notice">
+        <div class="row align-items-center">
+          <div class="col-md-8">
+            <h6 class="fw-bold text-dark mb-1">
+              <i class="bi bi-info-circle text-primary me-1"></i> Story URL Configuration & Direct Access
+            </h6>
+            <p class="small text-secondary mb-0">
+              Configured Story URL: <code>{{ config.STORY_VIZ_URL }}</code>. You can view the complete story directly on Tableau Public.
+            </p>
+          </div>
+          <div class="col-md-4 text-md-end mt-2 mt-md-0">
+            <a href="{{ config.TABLEAU_URL }}" target="_blank" rel="noopener noreferrer" class="btn btn-outline-dark btn-sm fw-bold">
+              <i class="bi bi-box-arrow-up-right me-1"></i> Open Story in Tableau Public
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Structured Key Findings & Analytical Placeholders -->
+    <div class="mt-5">
+      <div class="section-title-wrap text-start mb-4">
+        <span class="section-tag">Analytical Commentary</span>
+        <h2 class="h4 fw-bold text-dark">Sequential Story Points & Analytical Findings</h2>
+        <p class="text-secondary small">
+          These structured analytical cards correspond to the sequence of points in the Tableau Story. Insert your empirical findings below directly from your Tableau chart observations.
+        </p>
+      </div>
+
+      <div class="row g-4">
+        <!-- Phase 1 -->
+        <div class="col-lg-6">
+          <div class="story-phase-card">
+            <div class="story-phase-num">Story Point 1 &bull; Upstream Benchmark</div>
+            <h4 class="h6 fw-bold text-dark mb-2">Brent Crude USD vs Retail Fuel Transmission</h4>
+            <p class="small text-secondary mb-3">
+              Investigates the degree of price correlation between the global crude oil benchmark (Brent Crude in USD/barrel) and domestic retail pump prices for petrol and diesel.
+            </p>
+            <div class="p-3 bg-light rounded border border-dashed text-secondary small">
+              <strong><i class="bi bi-pin-angle me-1 text-teal"></i> Key Finding (Placeholder):</strong><br>
+              <em>[Add your actual finding here: e.g., Detail how closely retail pump prices track international Brent crude fluctuations across different time periods, noting any lag effects in domestic markets.]</em>
+            </div>
+          </div>
+        </div>
+
+        <!-- Phase 2 -->
+        <div class="col-lg-6">
+          <div class="story-phase-card">
+            <div class="story-phase-num">Story Point 2 &bull; Fiscal Wedge</div>
+            <h4 class="h6 fw-bold text-dark mb-2">Tax Percentage Variance Across Income Levels</h4>
+            <p class="small text-secondary mb-3">
+              Contrasts sovereign fuel taxation rates across World Bank income classifications (High, Upper Middle, Lower Middle, and Low Income nations).
+            </p>
+            <div class="p-3 bg-light rounded border border-dashed text-secondary small">
+              <strong><i class="bi bi-pin-angle me-1 text-teal"></i> Key Finding (Placeholder):</strong><br>
+              <em>[Add your actual finding here: e.g., Note whether high-income nations levy significantly higher fuel excise taxes compared to developing nations who may prioritize fuel affordability over fiscal revenue.]</em>
+            </div>
+          </div>
+        </div>
+
+        <!-- Phase 3 -->
+        <div class="col-lg-6">
+          <div class="story-phase-card">
+            <div class="story-phase-num">Story Point 3 &bull; Subsidy Regimes</div>
+            <h4 class="h6 fw-bold text-dark mb-2">Subsidy Levels and Artificial Price Buffering</h4>
+            <p class="small text-secondary mb-3">
+              Analyzes how heavy consumer subsidies insulate retail prices from global market volatility, particularly in net energy-exporting countries.
+            </p>
+            <div class="p-3 bg-light rounded border border-dashed text-secondary small">
+              <strong><i class="bi bi-pin-angle me-1 text-teal"></i> Key Finding (Placeholder):</strong><br>
+              <em>[Add your actual finding here: e.g., Highlight specific nations or regions where high subsidy levels keep petrol and LPG prices substantially below world average levels.]</em>
+            </div>
+          </div>
+        </div>
+
+        <!-- Phase 4 -->
+        <div class="col-lg-6">
+          <div class="story-phase-card">
+            <div class="story-phase-num">Story Point 4 &bull; Product Divergence</div>
+            <h4 class="h6 fw-bold text-dark mb-2">Petrol vs. Diesel vs. LPG Price Spreads</h4>
+            <p class="small text-secondary mb-3">
+              Examines differential pricing policies between passenger vehicle fuel (Petrol), commercial transit fuel (Diesel), and domestic energy (LPG).
+            </p>
+            <div class="p-3 bg-light rounded border border-dashed text-secondary small">
+              <strong><i class="bi bi-pin-angle me-1 text-teal"></i> Key Finding (Placeholder):</strong><br>
+              <em>[Add your actual finding here: e.g., Describe whether governments systematically tax diesel at lower rates than petrol to prevent freight transport inflation, or promote LPG via targeted tax exemptions.]</em>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Conclusion & Analytical Synthesis -->
+      <div class="card border-0 shadow-sm mt-4 p-4" style="background: linear-gradient(135deg, var(--navy-dark) 0%, #1e3a5f 100%); color: #ffffff;">
+        <div class="d-flex align-items-center gap-2 mb-2">
+          <i class="bi bi-check-circle-fill text-warning fs-5"></i>
+          <h4 class="h5 fw-bold mb-0">Conclusion & Strategic Policy Takeaways</h4>
+        </div>
+        <p class="small text-slate-300 mb-3" style="color: #cbd5e1;">
+          Synthesis of empirical findings derived from the Tableau Story visualization framework:
+        </p>
+        <div class="p-3 rounded border border-secondary border-opacity-50 small bg-dark bg-opacity-25">
+          <strong><i class="bi bi-card-text me-1 text-warning"></i> Synthesis (Placeholder):</strong><br>
+          <em>[Insert your project conclusion here once your Tableau analysis is finalized: Summarize the overarching relationship between international crude prices, sovereign fiscal taxation structures, and consumer fuel affordability across the analyzed global regions.]</em>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+{% endblock %}
+

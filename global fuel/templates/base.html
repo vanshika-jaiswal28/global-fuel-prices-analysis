@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>{% block title %}Global Fuel Analytics{% endblock %} | Global Fuel Prices & Taxation Trends</title>
+  
+  <!-- Meta Descriptions for SEO and Professional Presentation -->
+  <meta name="description" content="Global Fuel Prices and Taxation Trends: An interactive data analytics web application powered by Python Flask and Tableau Public.">
+  <meta name="author" content="Data Analytics Specialist">
+
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap 5.3 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+  {% block extra_head %}{% endblock %}
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom sticky-top" aria-label="Main Navigation">
+      <div class="container">
+        <a class="navbar-brand" href="{{ url_for('index') }}">
+          <span class="brand-icon"><i class="bi bi-fuel-pump-fill"></i></span>
+          <span>Global Fuel <span style="color: var(--teal-light); font-weight: 800;">Analytics</span></span>
+        </a>
+
+        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain" aria-controls="navbarMain" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarMain">
+          <ul class="navbar-nav ms-auto align-items-lg-center gap-1">
+            <li class="nav-item">
+              <a class="nav-link {% if active_page == 'home' %}active{% endif %}" href="{{ url_for('index') }}">
+                <i class="bi bi-house-door me-1"></i> Home
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link {% if active_page == 'dashboard' %}active{% endif %}" href="{{ url_for('dashboard') }}">
+                <i class="bi bi-speedometer2 me-1"></i> Dashboard
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link {% if active_page == 'story' %}active{% endif %}" href="{{ url_for('story') }}">
+                <i class="bi bi-journal-text me-1"></i> Tableau Story
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link {% if active_page == 'about' %}active{% endif %}" href="{{ url_for('about') }}">
+                <i class="bi bi-info-circle me-1"></i> About Project
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link {% if active_page == 'contact' %}active{% endif %}" href="{{ url_for('contact') }}">
+                <i class="bi bi-envelope me-1"></i> Contact
+              </a>
+            </li>
+            <li class="nav-item ms-lg-2">
+              <a class="nav-link nav-cta-btn" href="{{ url_for('dashboard') }}">
+                <i class="bi bi-pie-chart-fill me-1"></i> Explore Viz
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Flash Messages Notifications -->
+  <div class="container mt-3">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="alert alert-{{ category }} alert-dismissible fade show shadow-sm" role="alert">
+            <i class="bi {% if category == 'success' %}bi-check-circle-fill{% else %}bi-exclamation-triangle-fill{% endif %} me-2"></i>
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+  </div>
+
+  <!-- Main Dynamic Content -->
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+
+  <!-- Global Footer -->
+  <footer class="footer-custom">
+    <div class="container">
+      <div class="row g-4">
+        <!-- Project Summary Column -->
+        <div class="col-lg-5 col-md-6">
+          <div class="d-flex align-items-center gap-2 mb-3">
+            <span class="brand-icon"><i class="bi bi-fuel-pump-fill"></i></span>
+            <span class="text-white fw-bold fs-5">Global Fuel Analytics</span>
+          </div>
+          <p class="text-secondary small mb-3">
+            A comprehensive data visualization and economic analytics platform analyzing international retail fuel prices (Petrol, Diesel, LPG), crude oil price pass-through, regional disparities, and sovereign taxation frameworks.
+          </p>
+          <div class="d-flex flex-wrap gap-2">
+            <span class="badge bg-dark border border-secondary text-light">Python Flask</span>
+            <a href="{{ config.TABLEAU_URL }}" target="_blank" rel="noopener noreferrer" class="badge bg-dark border border-secondary text-light text-decoration-none">
+              <i class="bi bi-bar-chart-steps text-teal me-1" style="color: var(--teal-light);"></i> Tableau Public <i class="bi bi-box-arrow-up-right small ms-1"></i>
+            </a>
+            <span class="badge bg-dark border border-secondary text-light">Bootstrap 5</span>
+            <span class="badge bg-dark border border-secondary text-light">Jinja2</span>
+          </div>
+        </div>
+
+        <!-- Quick Navigation Column -->
+        <div class="col-lg-3 col-md-6">
+          <h5>Quick Navigation</h5>
+          <ul class="footer-links">
+            <li><a href="{{ url_for('index') }}"><i class="bi bi-chevron-right me-1 small"></i> Home Page</a></li>
+            <li><a href="{{ url_for('dashboard') }}"><i class="bi bi-chevron-right me-1 small"></i> Interactive Dashboard</a></li>
+            <li><a href="{{ url_for('story') }}"><i class="bi bi-chevron-right me-1 small"></i> Tableau Story & Narrative</a></li>
+            <li><a href="{{ url_for('about') }}"><i class="bi bi-chevron-right me-1 small"></i> Methodology & Dataset</a></li>
+            <li><a href="{{ url_for('contact') }}"><i class="bi bi-chevron-right me-1 small"></i> Contact & Feedback</a></li>
+          </ul>
+        </div>
+
+        <!-- Analytical Scope Column -->
+        <div class="col-lg-4 col-md-12">
+          <h5>Tableau Project Scope</h5>
+          <p class="text-secondary small mb-2">
+            <strong>Project Title:</strong> Global Fuel Prices and Taxation Trends: A Comprehensive Analysis
+          </p>
+          <p class="text-secondary small mb-3">
+            Explores 10 key empirical dimensions: Country, Date, Income Level, Region, Subsidy Level, Brent Crude, Diesel, LPG, Petrol, and Tax Percentage.
+          </p>
+          <div class="d-flex align-items-center gap-2">
+            <a href="{{ config.TABLEAU_URL }}" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline-light">
+              <i class="bi bi-box-arrow-up-right me-1"></i> Open on Tableau Public
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <hr class="footer-divider">
+
+      <div class="row align-items-center">
+        <div class="col-md-6 text-center text-md-start mb-2 mb-md-0">
+          <small class="text-secondary">
+            &copy; 2025 Global Fuel Analytics. Academic & Research Portfolio Project.
+          </small>
+        </div>
+        <div class="col-md-6 text-center text-md-end">
+          <small class="text-secondary">
+            Designed for Data Analytics with Tableau &bull; All data visualizations served via <a href="{{ config.TABLEAU_URL }}" target="_blank" rel="noopener noreferrer" style="color: var(--teal-light); text-decoration: none;">Tableau Public <i class="bi bi-box-arrow-up-right small"></i></a>
+          </small>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap 5.3 Bundle with Popper JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+  <!-- Custom Site JS -->
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+  {% block extra_scripts %}{% endblock %}
+</body>
+</html>
+

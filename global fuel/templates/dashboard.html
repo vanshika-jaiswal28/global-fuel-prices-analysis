@@ -1,0 +1,166 @@
+{% extends "base.html" %}
+
+{% block title %}Interactive Dashboard - Global Fuel Analytics{% endblock %}
+
+{% block extra_head %}
+<!-- Official Tableau Embedding API v3 (Modern Web Component) -->
+<script type="module" src="https://public.tableau.com/javascripts/api/tableau.embedding.3.latest.min.js"></script>
+{% endblock %}
+
+{% block content %}
+<!-- Page Header Banner -->
+<section class="page-header-banner">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-8">
+        <div class="d-inline-flex align-items-center gap-2 mb-2">
+          <span class="badge" style="background: var(--teal-primary);">Interactive Viz</span>
+          <span class="text-secondary small">Tableau Public Engine</span>
+        </div>
+        <h1 class="page-header-title">Global Fuel Prices & Taxation Dashboard</h1>
+        <p class="page-header-subtitle">
+          Explore cross-country fuel metrics, taxation percentages, and subsidy impact using dynamic Tableau visualizations.
+        </p>
+      </div>
+      <div class="col-lg-4 text-lg-end mt-3 mt-lg-0">
+        <a href="{{ config.TABLEAU_URL }}" target="_blank" rel="noopener noreferrer" class="btn btn-outline-light btn-sm">
+          <i class="bi bi-box-arrow-up-right me-1"></i> Open on Tableau Public
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Dashboard Main Container -->
+<section class="section-padding py-4">
+  <div class="container-fluid px-lg-4">
+
+    <!-- Configuration Alert / Information Pill -->
+    <div class="alert alert-light border shadow-sm mb-4 d-flex align-items-center justify-content-between flex-wrap gap-2">
+      <div class="d-flex align-items-center gap-2">
+        <i class="bi bi-info-circle-fill text-teal fs-5" style="color: var(--teal-primary);"></i>
+        <small class="text-secondary">
+          <strong>Configured Tableau Source:</strong> 
+          <code class="text-dark bg-light px-2 py-1 rounded">{{ config.DASHBOARD_VIZ_URL }}</code>
+        </small>
+      </div>
+      <span class="badge bg-success-subtle text-success border border-success-subtle">
+        <i class="bi bi-check-circle-fill me-1"></i> Interactive Mode Active
+      </span>
+    </div>
+
+    <!-- Tableau Embed Card -->
+    <div class="tableau-outer-card" id="tableauCard">
+      <!-- Toolbar Header -->
+      <div class="tableau-toolbar-strip">
+        <div class="tableau-title-status">
+          <span class="fw-bold text-dark fs-6">
+            <i class="bi bi-bar-chart-steps text-teal me-1" style="color: var(--teal-primary);"></i>
+            Tableau Public Visualization: Dashboard 1
+          </span>
+          <span class="status-pill live">
+            <span class="spinner-grow spinner-grow-sm text-success" style="width: 8px; height: 8px;" role="status"></span>
+            Live Embed
+          </span>
+        </div>
+
+        <!-- Controls -->
+        <div class="tableau-actions">
+          <button type="button" class="btn-viz-control" data-action="reload-viz" title="Reload Dashboard Visualization">
+            <i class="bi bi-arrow-clockwise"></i>
+            <span class="btn-label">Reload</span>
+          </button>
+          
+          <button type="button" class="btn-viz-control" data-action="toggle-fullscreen" title="Toggle Fullscreen View">
+            <i class="bi bi-arrows-fullscreen"></i>
+            <span class="btn-label">Fullscreen</span>
+          </button>
+
+          <a href="{{ config.TABLEAU_URL }}" target="_blank" rel="noopener noreferrer" class="btn-viz-control text-primary" title="Open directly in Tableau Public">
+            <i class="bi bi-box-arrow-up-right"></i>
+            <span>Tableau Link</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Viewport & Embed Container -->
+      <div class="viz-container-viewport">
+        <!-- Loading Spinner Overlay -->
+        <div class="viz-loading-overlay">
+          <div class="viz-spinner"></div>
+          <h6 class="fw-bold text-dark mb-1">Loading Tableau Public Dashboard...</h6>
+          <p class="text-secondary small mb-2">Connecting to Tableau Public servers and rendering visual elements.</p>
+          <small class="text-muted">Takes ~2-4 seconds depending on your network connection.</small>
+        </div>
+
+        <!-- Primary: Tableau Embedding API v3 Web Component -->
+        <tableau-viz id="tableauViz"
+          src="{{ config.DASHBOARD_VIZ_URL }}"
+          toolbar="bottom"
+          hide-tabs>
+        </tableau-viz>
+      </div>
+
+      <!-- Fallback Box if Tableau fails or is blocked by third-party cookie restrictions -->
+      <div class="viz-fallback-notice">
+        <div class="row align-items-center">
+          <div class="col-md-8">
+            <h6 class="fw-bold text-dark mb-1">
+              <i class="bi bi-shield-exclamation text-warning me-1"></i> Visualization not appearing or taking too long?
+            </h6>
+            <p class="small text-secondary mb-0">
+              Some browser privacy shields, ad-blockers, or third-party cookie blockers can restrict embedded Tableau frames. You can view the full dashboard directly on Tableau Public.
+            </p>
+          </div>
+          <div class="col-md-4 text-md-end mt-2 mt-md-0">
+            <a href="{{ config.TABLEAU_URL }}" target="_blank" rel="noopener noreferrer" class="btn btn-warning btn-sm fw-bold">
+              <i class="bi bi-box-arrow-up-right me-1"></i> Open Dashboard Directly
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Analytical Guide & How-to-Interact Cards -->
+    <div class="row g-4 mt-2">
+      <div class="col-lg-4">
+        <div class="card h-100 border-0 shadow-sm p-3">
+          <div class="d-flex align-items-center gap-2 mb-2">
+            <i class="bi bi-funnel-fill text-teal fs-5" style="color: var(--teal-primary);"></i>
+            <h5 class="h6 fw-bold mb-0">Using Dynamic Filters</h5>
+          </div>
+          <p class="small text-secondary mb-0">
+            Click on individual countries on the choropleth map or use dropdown filters for <strong>Region</strong> and <strong>Income Level</strong> to isolate specific economic segments.
+          </p>
+        </div>
+      </div>
+
+      <div class="col-lg-4">
+        <div class="card h-100 border-0 shadow-sm p-3">
+          <div class="d-flex align-items-center gap-2 mb-2">
+            <i class="bi bi-cursor-fill text-warning fs-5"></i>
+            <h5 class="h6 fw-bold mb-0">Hover Tooltips</h5>
+          </div>
+          <p class="small text-secondary mb-0">
+            Hover over any chart element to inspect exact metric breakdowns: <em>Petrol USD/L</em>, <em>Diesel USD/L</em>, <em>LPG USD/L</em>, and <em>Tax Percentage</em> for that nation.
+          </p>
+        </div>
+      </div>
+
+      <div class="col-lg-4">
+        <div class="card h-100 border-0 shadow-sm p-3">
+          <div class="d-flex align-items-center gap-2 mb-2">
+            <i class="bi bi-sliders text-primary fs-5"></i>
+            <h5 class="h6 fw-bold mb-0">Configuring the URL</h5>
+          </div>
+          <p class="small text-secondary mb-0">
+            To point to a different Tableau Public workbook, simply update <code>DASHBOARD_VIZ_URL</code> in <code>app.py</code> or pass the <code>TABLEAU_DASHBOARD_URL</code> environment variable.
+          </p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+{% endblock %}
+

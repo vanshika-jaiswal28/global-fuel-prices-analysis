@@ -1,0 +1,282 @@
+{% extends "base.html" %}
+
+{% block title %}About Project - Global Fuel Analytics{% endblock %}
+
+{% block content %}
+<!-- Page Header Banner -->
+<section class="page-header-banner">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-8">
+        <div class="d-inline-flex align-items-center gap-2 mb-2">
+          <span class="badge" style="background: var(--teal-primary);">Documentation</span>
+          <span class="text-secondary small">Academic & Technical Reference</span>
+        </div>
+        <h1 class="page-header-title">About the Project & Methodology</h1>
+        <p class="page-header-subtitle">
+          Comprehensive project background, empirical dataset schema, data preparation workflow, visualization suite, and analytical limitations.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- About Main Body -->
+<section class="section-padding py-5">
+  <div class="container">
+
+    <!-- 1. Project Objectives & Problem Statement -->
+    <div class="mb-5">
+      <div class="section-title-wrap text-start mb-4">
+        <span class="section-tag">Overview</span>
+        <h2 class="h3 fw-bold text-dark">1. Project Objectives & Problem Statement</h2>
+      </div>
+
+      <div class="card border-0 shadow-sm p-4 bg-white rounded-3 mb-4">
+        <p class="text-secondary leading-relaxed mb-3">
+          Energy pricing is one of the most critical determinants of modern macroeconomic stability, direct consumer inflation, and industrial logistics. While upstream crude oil is priced in standardized global commodity benchmarks (such as Brent Crude), retail prices at domestic fueling pumps vary by more than 1000% from one nation to another.
+        </p>
+        <p class="text-secondary leading-relaxed mb-0">
+          The primary objective of <strong>Global Fuel Prices and Taxation Trends</strong> is to investigate and visually decouple the fundamental forces driving these retail disparities:
+        </p>
+        <ul class="text-secondary mt-2 mb-0 small">
+          <li class="mb-1"><strong>Fiscal Wedge:</strong> Measuring how sovereign tax percentages and excise duties inflate consumer pump prices.</li>
+          <li class="mb-1"><strong>Subsidies & Energy Sovereignty:</strong> Evaluating how government subsidy tiers cushion consumers in oil-rich vs. energy-importing economies.</li>
+          <li class="mb-1"><strong>Socioeconomic Affordability:</strong> Contrasting fuel burden across World Bank income levels (High, Upper Middle, Lower Middle, and Low Income).</li>
+          <li class="mb-1"><strong>Temporal Commodity Correlation:</strong> Assessing the degree and speed of Brent Crude international price pass-through to retail Petrol, Diesel, and LPG products.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 2. Dataset Schema & Descriptions -->
+    <div class="mb-5">
+      <div class="section-title-wrap text-start mb-4">
+        <span class="section-tag">Data Architecture</span>
+        <h2 class="h3 fw-bold text-dark">2. Dataset Source & Field Definitions</h2>
+        <p class="text-secondary small mb-0">
+          The underlying dataset compiles macroeconomic, energetic, and fiscal attributes across sovereign territories worldwide.
+        </p>
+      </div>
+
+      <div class="dataset-table-card">
+        <div class="table-responsive">
+          <table class="table table-custom mb-0">
+            <thead>
+              <tr>
+                <th style="width: 20%;">Field Name</th>
+                <th style="width: 25%;">Data Type & Standard</th>
+                <th>Analytical Description & Purpose</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for field in config.DATASET_FIELDS %}
+              <tr>
+                <td>
+                  <strong class="text-dark">{{ field.name }}</strong>
+                </td>
+                <td>
+                  <span class="badge bg-light text-dark border">{{ field.type }}</span>
+                </td>
+                <td class="text-secondary">
+                  {{ field.description }}
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. Data Preparation & Cleaning Methodology -->
+    <div class="mb-5">
+      <div class="section-title-wrap text-start mb-4">
+        <span class="section-tag">Data Engineering</span>
+        <h2 class="h3 fw-bold text-dark">3. Data Preparation & Preprocessing Methodology</h2>
+      </div>
+
+      <div class="row g-4">
+        <div class="col-md-6">
+          <div class="card h-100 border-0 shadow-sm p-4">
+            <h5 class="h6 fw-bold text-dark mb-2">
+              <i class="bi bi-currency-exchange text-teal me-2" style="color: var(--teal-primary);"></i>Currency & Unit Harmonization
+            </h5>
+            <p class="small text-secondary mb-0">
+              Retail prices originally quoted in local sovereign currencies and domestic measurement units (e.g., US Gallons vs Imperial Liters) were converted to standardized <strong>US Dollars per Liter (USD/L)</strong> using historical monthly foreign exchange averages.
+            </p>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="card h-100 border-0 shadow-sm p-4">
+            <h5 class="h6 fw-bold text-dark mb-2">
+              <i class="bi bi-calendar-check text-warning me-2"></i>Temporal Normalization
+            </h5>
+            <p class="small text-secondary mb-0">
+              Observation dates were synchronized across multi-source reporting registries. Irregular temporal intervals were aggregated to common periodic timestamps to enable aligned longitudinal joins with monthly Brent Crude benchmark averages.
+            </p>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="card h-100 border-0 shadow-sm p-4">
+            <h5 class="h6 fw-bold text-dark mb-2">
+              <i class="bi bi-funnel text-primary me-2"></i>Missing Value & Outlier Remediation
+            </h5>
+            <p class="small text-secondary mb-0">
+              Missing values in LPG or Diesel records for small island states were inspected. Extreme reporting errors or hyperinflation artifacts were verified against secondary registries or excluded from comparative percentiles to preserve statistical integrity.
+            </p>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="card h-100 border-0 shadow-sm p-4">
+            <h5 class="h6 fw-bold text-dark mb-2">
+              <i class="bi bi-tags text-success me-2"></i>Categorical Standardization
+            </h5>
+            <p class="small text-secondary mb-0">
+              National Income Levels were harmonized with current World Bank Atlas method definitions. Regional boundaries were mapped to official UN geographic classifications to enable hierarchically consistent drill-downs.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. Visualizations Created -->
+    <div class="mb-5">
+      <div class="section-title-wrap text-start mb-4">
+        <span class="section-tag">Tableau Portfolio</span>
+        <h2 class="h3 fw-bold text-dark">4. Visualizations Created in Tableau</h2>
+      </div>
+
+      <div class="row g-4">
+        <div class="col-md-3">
+          <div class="card h-100 border-0 shadow-sm p-3 text-center">
+            <i class="bi bi-map-fill fs-2 text-teal mb-2" style="color: var(--teal-primary);"></i>
+            <h5 class="h6 fw-bold">Choropleth Map</h5>
+            <p class="small text-secondary mb-0">Global geospatial distribution of petrol and diesel prices by sovereign borders.</p>
+          </div>
+        </div>
+
+        <div class="col-md-3">
+          <div class="card h-100 border-0 shadow-sm p-3 text-center">
+            <i class="bi bi-graph-up-arrow fs-2 text-warning mb-2"></i>
+            <h5 class="h6 fw-bold">Dual-Axis Time Series</h5>
+            <p class="small text-secondary mb-0">Longitudinal tracking of Brent Crude ($/bbl) vs pump prices ($/L) over time.</p>
+          </div>
+        </div>
+
+        <div class="col-md-3">
+          <div class="card h-100 border-0 shadow-sm p-3 text-center">
+            <i class="bi bi-bar-chart-fill fs-2 text-primary mb-2"></i>
+            <h5 class="h6 fw-bold">Comparative Bar Charts</h5>
+            <p class="small text-secondary mb-0">Contrasting average Tax Percentage across different World Bank income brackets.</p>
+          </div>
+        </div>
+
+        <div class="col-md-3">
+          <div class="card h-100 border-0 shadow-sm p-3 text-center">
+            <i class="bi bi-pie-chart-fill fs-2 text-danger mb-2"></i>
+            <h5 class="h6 fw-bold">Subsidy Distribution</h5>
+            <p class="small text-secondary mb-0">Evaluation of retail price buffering across varying national subsidy regimes.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. Tools & Technologies Used -->
+    <div class="mb-5">
+      <div class="section-title-wrap text-start mb-4">
+        <span class="section-tag">Technology Stack</span>
+        <h2 class="h3 fw-bold text-dark">5. Tools & Technologies Used</h2>
+      </div>
+
+      <div class="row g-3">
+        <div class="col-lg-4 col-md-6">
+          <div class="d-flex align-items-center gap-3 p-3 bg-white rounded border shadow-sm">
+            <i class="bi bi-filetype-py fs-2 text-primary"></i>
+            <div>
+              <strong class="d-block text-dark">Python Flask 3</strong>
+              <small class="text-secondary">Lightweight WSGI backend routing & dynamic templating</small>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6">
+          <a href="{{ config.TABLEAU_URL }}" target="_blank" rel="noopener noreferrer" class="text-decoration-none">
+            <div class="d-flex align-items-center gap-3 p-3 bg-white rounded border shadow-sm h-100 hover-shadow transition">
+              <i class="bi bi-bar-chart-line-fill fs-2 text-warning"></i>
+              <div>
+                <strong class="d-block text-dark">Tableau Public <i class="bi bi-box-arrow-up-right small text-muted ms-1"></i></strong>
+                <small class="text-secondary">Interactive visual analytics engine and story presentation</small>
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <div class="col-lg-4 col-md-6">
+          <div class="d-flex align-items-center gap-3 p-3 bg-white rounded border shadow-sm">
+            <i class="bi bi-bootstrap-fill fs-2 text-purple" style="color: #7952b3;"></i>
+            <div>
+              <strong class="d-block text-dark">Bootstrap 5.3 & CSS3</strong>
+              <small class="text-secondary">Responsive mobile-first layout and accessibility styling</small>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6">
+          <div class="d-flex align-items-center gap-3 p-3 bg-white rounded border shadow-sm">
+            <i class="bi bi-code-slash fs-2 text-success"></i>
+            <div>
+              <strong class="d-block text-dark">Jinja2 Template Engine</strong>
+              <small class="text-secondary">Modular layout inheritance and dynamic context binding</small>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6">
+          <div class="d-flex align-items-center gap-3 p-3 bg-white rounded border shadow-sm">
+            <i class="bi bi-git fs-2 text-danger"></i>
+            <div>
+              <strong class="d-block text-dark">Git & GitHub</strong>
+              <small class="text-secondary">Distributed version control and open source repository hosting</small>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6">
+          <div class="d-flex align-items-center gap-3 p-3 bg-white rounded border shadow-sm">
+            <i class="bi bi-cloud-arrow-up-fill fs-2 text-info"></i>
+            <div>
+              <strong class="d-block text-dark">Cloud Deployment</strong>
+              <small class="text-secondary">Gunicorn WSGI server ready for Render, Railway, or Vercel</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6. Limitations of the Analysis -->
+    <div>
+      <div class="section-title-wrap text-start mb-4">
+        <span class="section-tag">Analytical Boundaries</span>
+        <h2 class="h3 fw-bold text-dark">6. Limitations of the Analysis</h2>
+      </div>
+
+      <div class="callout-warning">
+        <h5 class="h6 fw-bold mb-2 text-dark">
+          <i class="bi bi-exclamation-triangle-fill text-warning me-1"></i> Methodological Constraints & Data Caveats
+        </h5>
+        <ul class="small text-secondary mb-0">
+          <li class="mb-1"><strong>Foreign Exchange Volatility:</strong> Standardizing retail fuel prices in USD exposes historical trends to exchange rate swings, which can amplify or diminish local currency price stability.</li>
+          <li class="mb-1"><strong>Reporting Lag:</strong> Developing economies often report fuel statistics on varying quarterly cycles compared to daily/weekly reporting in OECD member nations.</li>
+          <li class="mb-1"><strong>Sub-National Variance:</strong> State-level or provincial fuel tax variations (such as distinct US state gas taxes or Canadian provincial fuel taxes) are aggregated to national averages.</li>
+          <li class="mb-1"><strong>Fuel Quality & Octane Differences:</strong> Regular 87/91 AKI gasoline and premium blends are harmonized under generic petrol classifications.</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+{% endblock %}
+

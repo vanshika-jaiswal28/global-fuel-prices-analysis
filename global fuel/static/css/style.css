@@ -1,0 +1,730 @@
+/* ==========================================================================
+   Global Fuel Analytics - Professional Theme Stylesheet
+   Palette: Dark Navy Blue, Teal, Clean White, Subtle Warm Orange Accents
+   ========================================================================== */
+
+:root {
+  /* Color System */
+  --navy-darkest: #090d16;
+  --navy-dark: #0f172a;
+  --navy-surface: #1e293b;
+  --navy-border: #334155;
+  --teal-primary: #0d9488;
+  --teal-light: #14b8a6;
+  --teal-tint: #f0fdfa;
+  --teal-badge: rgba(13, 148, 136, 0.12);
+  --orange-accent: #f97316;
+  --orange-hover: #ea580c;
+  --orange-tint: #fff7ed;
+  --slate-50: #f8fafc;
+  --slate-100: #f1f5f9;
+  --slate-200: #e2e8f0;
+  --slate-400: #94a3b8;
+  --slate-600: #475569;
+  --slate-800: #1e293b;
+  --slate-900: #0f172a;
+
+  /* Typography */
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  
+  /* Layout & Elevations */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(15, 23, 42, 0.08), 0 2px 4px -2px rgba(15, 23, 42, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(15, 23, 42, 0.08), 0 4px 6px -4px rgba(15, 23, 42, 0.04);
+  --shadow-xl: 0 20px 25px -5px rgba(15, 23, 42, 0.1), 0 8px 10px -6px rgba(15, 23, 42, 0.05);
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+}
+
+/* Base Global Styles */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--slate-50);
+  color: var(--slate-800);
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  flex: 1 0 auto;
+}
+
+/* Navbar */
+.navbar-custom {
+  background-color: var(--navy-dark);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 0.85rem 0;
+  transition: all 0.3s ease;
+}
+
+.navbar-brand {
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: #ffffff !important;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.brand-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  background: linear-gradient(135deg, var(--teal-primary), var(--teal-light));
+  border-radius: var(--radius-sm);
+  color: #ffffff;
+  font-size: 1.2rem;
+  box-shadow: 0 2px 8px rgba(13, 148, 136, 0.35);
+}
+
+.nav-link {
+  color: #cbd5e1 !important;
+  font-weight: 500;
+  font-size: 0.95rem;
+  padding: 0.5rem 0.9rem !important;
+  border-radius: var(--radius-sm);
+  transition: all 0.2s ease;
+}
+
+.nav-link:hover {
+  color: #ffffff !important;
+  background-color: rgba(255, 255, 255, 0.06);
+}
+
+.nav-link.active {
+  color: #ffffff !important;
+  background-color: rgba(13, 148, 136, 0.2);
+  font-weight: 600;
+  border: 1px solid rgba(20, 184, 166, 0.4);
+}
+
+.nav-cta-btn {
+  background-color: var(--orange-accent);
+  color: #ffffff !important;
+  font-weight: 600;
+  border-radius: var(--radius-sm);
+  padding: 0.5rem 1.1rem !important;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 6px rgba(249, 115, 22, 0.3);
+}
+
+.nav-cta-btn:hover {
+  background-color: var(--orange-hover);
+  color: #ffffff !important;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(249, 115, 22, 0.4);
+}
+
+/* Hero Section */
+.hero-section {
+  background: linear-gradient(135deg, #090d16 0%, #0f172a 45%, #13243d 100%);
+  color: #ffffff;
+  padding: 4.5rem 0 4rem;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.hero-section::before {
+  content: "";
+  position: absolute;
+  top: -40%;
+  right: -20%;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(13, 148, 136, 0.2) 0%, rgba(13, 148, 136, 0) 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.hero-section::after {
+  content: "";
+  position: absolute;
+  bottom: -40%;
+  left: -20%;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(249, 115, 22, 0.12) 0%, rgba(249, 115, 22, 0) 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(13, 148, 136, 0.2);
+  border: 1px solid rgba(20, 184, 166, 0.4);
+  color: var(--teal-light);
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 0.35rem 0.85rem;
+  border-radius: 50px;
+  margin-bottom: 1.25rem;
+}
+
+.hero-title {
+  font-size: 2.85rem;
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  margin-bottom: 1.25rem;
+}
+
+.hero-subtitle {
+  font-size: 1.15rem;
+  color: #cbd5e1;
+  max-width: 650px;
+  line-height: 1.65;
+  margin-bottom: 2rem;
+}
+
+.btn-primary-teal {
+  background: linear-gradient(135deg, var(--teal-primary), var(--teal-light));
+  color: #ffffff;
+  font-weight: 600;
+  padding: 0.75rem 1.6rem;
+  border-radius: var(--radius-sm);
+  border: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  box-shadow: 0 4px 12px rgba(13, 148, 136, 0.35);
+  transition: all 0.2s ease;
+  text-decoration: none;
+}
+
+.btn-primary-teal:hover {
+  background: linear-gradient(135deg, #0b7a6f, #0d9488);
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(13, 148, 136, 0.45);
+}
+
+.btn-secondary-outline {
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius-sm);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.2s ease;
+  text-decoration: none;
+}
+
+.btn-secondary-outline:hover {
+  background: rgba(255, 255, 255, 0.16);
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.4);
+  transform: translateY(-2px);
+}
+
+.hero-stat-box {
+  background: rgba(30, 41, 59, 0.7);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+  height: 100%;
+}
+
+/* Section Common Styling */
+.section-padding {
+  padding: 4.5rem 0;
+}
+
+.section-title-wrap {
+  text-align: center;
+  margin-bottom: 3.25rem;
+}
+
+.section-tag {
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--teal-primary);
+  margin-bottom: 0.5rem;
+}
+
+.section-title {
+  font-size: 2.1rem;
+  font-weight: 700;
+  color: var(--slate-900);
+  letter-spacing: -0.01em;
+}
+
+.section-desc {
+  font-size: 1.05rem;
+  color: var(--slate-600);
+  max-width: 680px;
+  margin: 0.5rem auto 0;
+}
+
+/* Feature & Metric Cards */
+.metric-card {
+  background: #ffffff;
+  border: 1px solid var(--slate-200);
+  border-radius: var(--radius-md);
+  padding: 1.85rem 1.6rem;
+  height: 100%;
+  transition: all 0.25s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.metric-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  border-color: rgba(13, 148, 136, 0.4);
+}
+
+.metric-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: var(--slate-200);
+  transition: background 0.25s ease;
+}
+
+.metric-card.petrol-card::before {
+  background: linear-gradient(90deg, #f97316, #fb923c);
+}
+
+.metric-card.diesel-card::before {
+  background: linear-gradient(90deg, #0d9488, #14b8a6);
+}
+
+.metric-card.lpg-card::before {
+  background: linear-gradient(90deg, #3b82f6, #60a5fa);
+}
+
+.metric-card.tax-card::before {
+  background: linear-gradient(90deg, #8b5cf6, #a78bfa);
+}
+
+.metric-icon-wrap {
+  width: 50px;
+  height: 50px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.petrol-icon {
+  background: #fff7ed;
+  color: #ea580c;
+}
+
+.diesel-icon {
+  background: #f0fdfa;
+  color: #0d9488;
+}
+
+.lpg-icon {
+  background: #eff6ff;
+  color: #2563eb;
+}
+
+.tax-icon {
+  background: #f5f3ff;
+  color: #7c3aed;
+}
+
+.metric-card-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: var(--slate-900);
+}
+
+.metric-card-text {
+  font-size: 0.92rem;
+  color: var(--slate-600);
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.metric-badge-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: auto;
+}
+
+.field-badge {
+  font-size: 0.75rem;
+  font-weight: 600;
+  background: var(--slate-100);
+  color: var(--slate-600);
+  padding: 0.2rem 0.55rem;
+  border-radius: 4px;
+}
+
+/* Analytical Focus Card */
+.framework-card {
+  background: #ffffff;
+  border: 1px solid var(--slate-200);
+  border-radius: var(--radius-md);
+  padding: 1.75rem;
+  height: 100%;
+  transition: all 0.25s ease;
+}
+
+.framework-card:hover {
+  border-color: var(--teal-light);
+  box-shadow: var(--shadow-md);
+}
+
+.framework-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--teal-tint);
+  color: var(--teal-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+/* Page Header Banner for inner pages */
+.page-header-banner {
+  background: linear-gradient(135deg, var(--navy-darkest) 0%, var(--navy-dark) 50%, #162a45 100%);
+  color: #ffffff;
+  padding: 3rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.page-header-title {
+  font-size: 2.1rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.page-header-subtitle {
+  font-size: 1.05rem;
+  color: #cbd5e1;
+  margin-bottom: 0;
+}
+
+/* Tableau Embedding Container */
+.tableau-outer-card {
+  background: #ffffff;
+  border: 1px solid var(--slate-200);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+  margin-bottom: 2rem;
+}
+
+.tableau-toolbar-strip {
+  background: #ffffff;
+  border-bottom: 1px solid var(--slate-200);
+  padding: 0.85rem 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.tableau-title-status {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.25rem 0.65rem;
+  border-radius: 20px;
+}
+
+.status-pill.live {
+  background: #ecfdf5;
+  color: #059669;
+  border: 1px solid #a7f3d0;
+}
+
+.tableau-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.btn-viz-control {
+  font-size: 0.85rem;
+  font-weight: 500;
+  padding: 0.4rem 0.85rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--slate-200);
+  background: #ffffff;
+  color: var(--slate-800);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  transition: all 0.2s ease;
+  text-decoration: none;
+}
+
+.btn-viz-control:hover {
+  background: var(--slate-100);
+  color: var(--slate-900);
+  border-color: var(--slate-400);
+}
+
+.viz-container-viewport {
+  position: relative;
+  width: 100%;
+  min-height: 820px;
+  background: #fafafa;
+}
+
+/* Tableau Web Component & iframe sizing */
+tableau-viz {
+  width: 100% !important;
+  height: 820px !important;
+  display: block;
+}
+
+.tableau-iframe-fallback {
+  width: 100%;
+  height: 820px;
+  border: none;
+  display: block;
+}
+
+/* Loading Overlay */
+.viz-loading-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.92);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+
+.viz-loading-overlay.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.viz-spinner {
+  width: 44px;
+  height: 44px;
+  border: 4px solid var(--slate-200);
+  border-top-color: var(--teal-primary);
+  border-radius: 50%;
+  animation: spin 0.9s linear infinite;
+  margin-bottom: 1rem;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Fallback Notice Box */
+.viz-fallback-notice {
+  background: var(--slate-100);
+  border-top: 1px solid var(--slate-200);
+  padding: 1.25rem 1.5rem;
+}
+
+/* Fullscreen mode for Tableau Container */
+.tableau-outer-card.is-fullscreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 99999;
+  border-radius: 0;
+  margin: 0;
+}
+
+.tableau-outer-card.is-fullscreen .viz-container-viewport,
+.tableau-outer-card.is-fullscreen tableau-viz,
+.tableau-outer-card.is-fullscreen .tableau-iframe-fallback {
+  height: calc(100vh - 65px) !important;
+}
+
+/* Story Phase Cards */
+.story-phase-card {
+  background: #ffffff;
+  border: 1px solid var(--slate-200);
+  border-left: 4px solid var(--teal-primary);
+  border-radius: var(--radius-sm);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  transition: all 0.2s ease;
+}
+
+.story-phase-card:hover {
+  border-color: var(--teal-primary);
+  box-shadow: var(--shadow-sm);
+}
+
+.story-phase-num {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--teal-primary);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-bottom: 0.35rem;
+}
+
+/* Dataset Table */
+.dataset-table-card {
+  background: #ffffff;
+  border: 1px solid var(--slate-200);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+}
+
+.table-custom th {
+  background: var(--navy-dark);
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 0.9rem;
+  padding: 0.9rem 1rem;
+  border-bottom: none;
+}
+
+.table-custom td {
+  padding: 0.9rem 1rem;
+  font-size: 0.92rem;
+  vertical-align: middle;
+  border-bottom: 1px solid var(--slate-200);
+}
+
+.table-custom tr:hover td {
+  background-color: var(--teal-tint);
+}
+
+/* Callout Alert */
+.callout-info {
+  background: #f0fdfa;
+  border-left: 4px solid var(--teal-primary);
+  padding: 1rem 1.25rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.92rem;
+}
+
+.callout-warning {
+  background: #fffbeb;
+  border-left: 4px solid #f59e0b;
+  padding: 1rem 1.25rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.92rem;
+}
+
+/* Footer */
+.footer-custom {
+  background-color: var(--navy-darkest);
+  color: #94a3b8;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 3.5rem 0 1.75rem;
+  font-size: 0.92rem;
+}
+
+.footer-custom h5 {
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 1.05rem;
+  margin-bottom: 1.2rem;
+}
+
+.footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-links li {
+  margin-bottom: 0.6rem;
+}
+
+.footer-links a {
+  color: #94a3b8;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.footer-links a:hover {
+  color: var(--teal-light);
+}
+
+.footer-divider {
+  border-color: rgba(255, 255, 255, 0.08);
+  margin: 2.5rem 0 1.5rem;
+}
+
+/* Responsive Overrides */
+@media (max-width: 991.98px) {
+  .hero-title {
+    font-size: 2.2rem;
+  }
+  .viz-container-viewport,
+  tableau-viz,
+  .tableau-iframe-fallback {
+    min-height: 700px;
+    height: 700px !important;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .hero-title {
+    font-size: 1.9rem;
+  }
+  .hero-section {
+    padding: 3rem 0;
+  }
+  .section-padding {
+    padding: 3rem 0;
+  }
+  .viz-container-viewport,
+  tableau-viz,
+  .tableau-iframe-fallback {
+    min-height: 560px;
+    height: 560px !important;
+  }
+  .tableau-toolbar-strip {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
